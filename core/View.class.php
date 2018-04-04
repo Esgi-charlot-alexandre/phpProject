@@ -1,22 +1,53 @@
 <?php
-class view {
-  private $v;
-  private $t;
 
-  public function __construct ($v = 'default', $t = 'front') {
-    $this->v = $v.'.view.php';
-    $this->t = $t.'.tpl.php';
+class View{
 
-    if (!file_exists('views/'.$this->$v)) {
-      die('Le template: '.$this->$v.'n\'existe pas');
-    }
+	private $v;
+	private $t;
+	private $data = [];
 
-    if (!file_exists('views/templates/'.$this->$t)) {
-      die('Le template: '.$this->$t.'n\'existe pas');
-    }
-  }
 
-  public function __destruct () {
-    include 'views/templates/'.$this->t;
-  }
+	public function __construct($v="default", $t="front"){
+		$this->v = $v.".view.php";
+		$this->t = $t.".tpl.php";
+
+		if( !file_exists("views/".$this->v) ){
+			die("La vue :".$this->v." n'existe pas");
+		}
+		if( !file_exists("views/templates/".$this->t) ){
+			die("Le template :".$this->t." n'existe pas");
+		}			
+
+	}
+
+
+	public function assign($key, $value){
+		$this->data[$key] = $value;
+	}
+
+	public function __destruct(){
+		global $a, $c;
+		
+		//["name"=>"Yves"]
+		extract($this->data);
+		//$name = "Yves"
+
+		include "views/templates/".$this->t;
+	}
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

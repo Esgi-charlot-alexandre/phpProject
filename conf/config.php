@@ -1,5 +1,15 @@
 <?php 
+
+define("DBUSER","root");
+define("DBPWD","root");
+define("DBHOST","database");
+define("DBNAME","database");
+define("DBPORT","3306");
+
 define("DS", "/");
-define("DIRNAME", dirname($_SERVER["SCRIPT_NAME"]).DS);
+
+$scriptName = (dirname($_SERVER["SCRIPT_NAME"])) ? '' : dirname($_SERVEUR['SCRIPT_NAME']);
+
+define("DIRNAME", $scriptName.DS);
 
 
